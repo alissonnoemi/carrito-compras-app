@@ -1,8 +1,10 @@
-import React from 'react'
-import { Text, useWindowDimensions, View } from 'react-native'
+import React, { ReactNode } from 'react'
+import { useWindowDimensions, View } from 'react-native'
 import { styles } from '../theme/appTheme'
-
-export const BodyComponents = (props : any) => {
+interface Props{
+    children: ReactNode;
+}
+export const BodyComponents = (props : Props) => {
     //hook useWindowsDimensions
     const { height } = useWindowDimensions();
     return (

@@ -6,8 +6,9 @@ import { styles } from '../theme/appTheme';
 //Definir la interfaz de los props
 interface Props {
     title: string;
+    
 }
-export const TitleComponents = ({ title }: Props) => {
+export const TitleComponents = ({ title}: Props) => {
     const {height} = useWindowDimensions ();
     return (
         <Text style={{...styles.title,
