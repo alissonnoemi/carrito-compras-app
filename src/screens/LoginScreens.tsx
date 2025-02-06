@@ -8,24 +8,21 @@ import { InputComponent } from '../components/InputComponent'
 import { BuutonComponent } from '../components/BuutonComponent'
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import { CommonActions, useNavigation } from '@react-navigation/native'
-
+import { User } from './navigator/StackNavigator'
+//Definir interface de propiedades
+interface Props{
+    users: User[];
+}
 interface LoginForm {
     Email: string,
     Password: string
-}
-//Definir interface estructura de mis obejtos usuarios
-interface User {
-    id: number,
-    name: string,
-    email: string,
-    password: string
 }
 //Definir arreglo con usuarios de prueba
 const users: User []=[
     {id: 1, name: 'Alisson Guapulema', email:'alissong@gmail.com', password: '20061502'},
     {id: 2, name: 'Noemi Sandoval', email:'nohemi@gmail.com', password: '123'}
 ]
-export const LoginScreens = () => {
+export const LoginScreens = ({users}: Props) => {
     const [loginForm, setLoginForm] = useState<LoginForm>({
         Email: '',
         Password: ''

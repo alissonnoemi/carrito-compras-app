@@ -7,7 +7,12 @@ import { styles } from '../theme/appTheme';
 import { InputComponent } from '../components/InputComponent';
 import { BuutonComponent } from '../components/BuutonComponent';
 import { CommonActions, useNavigation } from '@react-navigation/native';
-
+import { User } from './navigator/StackNavigator';
+//Definir la interface para las propiedades
+interface Props{
+    users: User[];
+    addUsers:(user:User)=>void;
+}
 //Definir interface
 interface RegisterForm {
     name: string;
@@ -15,7 +20,7 @@ interface RegisterForm {
     Password: string;
 }
 
-export const RegisterScreen = () => {
+export const RegisterScreen = ({users, addUsers}: Props) => {
     //hook useState
     const [registerForm, setregisterForm] = useState<RegisterForm>({
         name: '',
@@ -30,12 +35,23 @@ export const RegisterScreen = () => {
             ...registerForm,[name]:value
         });
     }
+    //Funció ara validar si el usuario existe
+    const verifyUser =()=>{
+        const existUser = users.find(user => user.email ===registerForm.Email)
+        return existUser;
+    }
     //Función para registro
     const handleRegister=()=>{
         if(registerForm.name === ''|| registerForm.Email===''|| registerForm.Password===''){
             Alert.alert('Error', 'Todos los campos son obligatorios')
             return;
         }
+        //validar si el usuario existe
+        if(verifyUser()){
+            Alert.alert('Error', 'Usario existente')
+            return;
+        }
+        console.log(registerForm)
     }
     //hook de navegación
     const navigation = useNavigation();
